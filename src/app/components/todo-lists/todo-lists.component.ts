@@ -22,6 +22,9 @@ export class TodoListsComponent {
   }
 
   createList(title: string): void {
+    if (!title) {
+      return;
+    }
     this.todoListService.create(title);
     this.input.nativeElement.value = '';
   }
