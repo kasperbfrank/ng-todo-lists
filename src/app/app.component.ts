@@ -11,7 +11,5 @@ export class AppComponent {
     return this.title.getTitle();
   }
 
-  constructor(private title: Title) {
-    title.setTitle('Not Another Todo App');
-  }
+  constructor(private title: Title) {}
 }

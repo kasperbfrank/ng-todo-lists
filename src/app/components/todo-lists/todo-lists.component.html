@@ -1,0 +1,20 @@
+<ul class="reset list">
+  <li
+    class="clicky list__item"
+    *ngFor="let list of todoLists$ | async"
+    [routerLink]="['./', list.id]"
+  >
+    <h6 class="mb-0">{{ list.title }}</h6>
+    <small class="font-light-gray">{{ todosLabel(list) }}</small>
+  </li>
+</ul>
+
+<form class="mt-3" (ngSubmit)="createList(todoListInput.value)" novalidate>
+  <input
+    #todoListInput
+    class="underline-input"
+    type="text"
+    placeholder="New todo list"
+    required
+  />
+</form>

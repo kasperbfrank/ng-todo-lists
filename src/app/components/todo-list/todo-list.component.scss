@@ -1,32 +1,16 @@
 @import '../../../styles/variables.scss';
 
-.container {
-  padding: 1rem 2rem;
+.list__item--completed {
+  border-color: transparent;
+  color: $light-gray;
+  text-decoration: line-through;
 }
 
-.todo-list {
-  &__item {
-    padding: 0.25rem 0.5rem;
-    color: $gray;
-    border: 1px solid $gray;
-    border-radius: 0.5rem;
-
-    & + .todo-list__item {
-      margin-top: 0.25rem;
-    }
-
-    &--completed {
-      border-color: transparent;
-      color: $light-gray;
-      text-decoration: line-through;
-    }
-  }
-}
-
-.todo-input {
-  border: 0;
-  outline: 0;
-  width: 100%;
-  border-bottom: 1px solid $gray;
+.checkbox {
   color: $gray;
+
+  & > svg {
+    height: 1.3rem;
+    margin-right: 0.25rem;
+  }
 }

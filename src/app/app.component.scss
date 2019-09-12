@@ -16,6 +16,10 @@
   }
 }
 
+.content-container {
+  padding: 1rem 2rem;
+}
+
 @media (min-width: $desktop-breakpoint) {
   :host {
     display: flex;
