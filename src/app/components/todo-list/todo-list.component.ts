@@ -51,7 +51,7 @@ export class TodoListComponent {
     this.todoInput.nativeElement.value = '';
   }
 
-  updateTodo(todo: Todo) {
+  updateTodo(todo: Todo): void {
     this.todoListService.updateTodo(this.listId, todo);
   }
 }

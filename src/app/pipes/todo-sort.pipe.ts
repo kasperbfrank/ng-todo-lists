@@ -5,7 +5,7 @@ import { Todo } from '../models/Todo';
   name: 'todoSort'
 })
 export class TodoSortPipe implements PipeTransform {
-  transform(todos: Todo[]): any {
+  transform(todos: Todo[]): Todo[] {
     return todos
       .sort((a, b) =>
         a.created < b.created ? -1 : a.created > b.created ? 1 : 0

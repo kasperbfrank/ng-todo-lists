@@ -5,7 +5,7 @@ import { Todo } from '../models/Todo';
   name: 'filterCompleted'
 })
 export class FilterCompletedPipe implements PipeTransform {
-  transform(todos: Todo[], showCompleted: boolean): any {
+  transform(todos: Todo[], showCompleted: boolean): Todo[] {
     return showCompleted ? todos : todos.filter(t => !t.completed);
   }
 }
