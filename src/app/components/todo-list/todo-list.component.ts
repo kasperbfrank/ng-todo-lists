@@ -5,7 +5,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { Todo } from 'src/app/models/Todo';

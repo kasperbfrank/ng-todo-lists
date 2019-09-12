@@ -1,4 +1,9 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 import { TodoList } from '../../models/TodoList';
 import { TodoListService } from 'src/app/services/todo-list.service';
@@ -8,7 +13,8 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-todo-lists',
   templateUrl: './todo-lists.component.html',
-  styleUrls: ['./todo-lists.component.scss']
+  styleUrls: ['./todo-lists.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoListsComponent {
   @ViewChild('todoListInput', { static: false }) input: ElementRef<
@@ -35,7 +41,7 @@ export class TodoListsComponent {
     return count === 0
       ? '0 todos'
       : completed === count
-      ? 'All done 🚀'
+      ? 'All done! 🚀'
       : `${count - completed} todos to do`;
   }
 }
