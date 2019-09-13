@@ -1,6 +1,16 @@
-export class Todo {
+export interface ITodo {
+  title: string;
+  completed: boolean;
+  created: Date;
+}
+
+export class Todo implements ITodo {
   public static create(title: string): Todo {
     return new Todo(title, false, new Date());
+  }
+
+  public static fromObject(todo: ITodo): Todo {
+    return new Todo(todo.title, todo.completed, todo.created);
   }
 
   protected constructor(

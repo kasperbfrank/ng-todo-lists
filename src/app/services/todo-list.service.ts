@@ -1,11 +1,42 @@
 import { Injectable } from '@angular/core';
-import { TodoList } from '../models/TodoList';
+import { TodoList, ITodoList } from '../models/TodoList';
 import { Todo } from '../models/Todo';
-import { Subject, Observable } from 'rxjs';
-import { scan, shareReplay, map, take } from 'rxjs/operators';
+import { Subject, Observable, MonoTypeOperatorFunction } from 'rxjs';
+import {
+  scan,
+  shareReplay,
+  map,
+  take,
+  tap,
+  startWith,
+  skipWhile
+} from 'rxjs/operators';
+import { isNullOrUndefined } from 'util';
 
 interface TodoListState {
   [id: number]: TodoList;
+}
+
+const TODO_STATE_KEY = 'TODO_STATE';
+
+function persist(): MonoTypeOperatorFunction<TodoListState> {
+  return state$ =>
+    state$.pipe(
+      tap(state => localStorage.setItem(TODO_STATE_KEY, JSON.stringify(state)))
+    );
+}
+
+function initialize(): MonoTypeOperatorFunction<TodoListState> {
+  const persisted = JSON.parse(localStorage.getItem(TODO_STATE_KEY)) as {
+    [id: number]: ITodoList;
+  };
+  const state =
+    persisted &&
+    Object.values(persisted)
+      .map(TodoList.fromObject)
+      .reduce((acc, list) => ({ ...acc, [list.id]: list }), {});
+
+  return state$ => state$.pipe(startWith(state));
 }
 
 @Injectable({
@@ -18,6 +49,9 @@ export class TodoListService {
       (acc, next) => ({ ...acc, [next.id]: next }),
       {}
     ),
+    persist(),
+    initialize(),
+    skipWhile(isNullOrUndefined),
     shareReplay(1)
   );
 
